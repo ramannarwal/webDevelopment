@@ -1,39 +1,50 @@
 var myApp = angular.module("myApp", ["ngRoute", "ngAnimate"]);  //making a module and name of module is myApp.
+																								//2nd parameter "ngRoute" & "ngAnimate" array of other module as dependencies.
 
 myApp.config(function($routeProvider) {   //this config will communicate with ng-view."$routeProvider" is used to tell it to
-																					/* communicate with our partial. */
+																					/* communicate with our partial files. */
 	$routeProvider
-		.when("/books", {     //route is /book abd templeurl is path to our parcal.
-			templateUrl: "partials/book-list.html",
+		.when("/books", {     //route url is /book
+			templateUrl: "partials/book-list.html",  //templeurl is path to our parcal file.
 			controller: "BookListCtrl"    // controller for this parcal
 		})
 		.when("/kart", {     //link
 			templateUrl: "partials/kart-list.html",  //path
 			controller: "KartListCtrl"  //controller
 		})
-	.otherwise({
-		redirectTo: "/books"
+		.otherwise({
+			redirectTo: "/books"     //This will be the default link when the page loads.
 	});
 });
 
+
+
+
+//creating a kartservice dependency
+
 myApp.factory("kartService", function() {
-	var kart = [];
+	var kart = [];  // we are creating variable kart which can be used to add book to the kart. We need 3 function one to get the kart
+									// 2nd functin to add book to the kart and one to buy the book
 
 	return {
-		getKart: function() {
-			return kart;
-		},
-		addToKart: function(book) {
-			kart.push(book);   //console.log("add to kart: ",book); try this to add log to console.
-		},
-		buy: function(book) {
-			alert("Thanks for buying: ", book.name);
-		}
-	}
+			getKart: function() {
+							return kart;
+							},
+			addToKart: function(book) {
+							kart.push(book);  					 //console.log("add to kart: ",book); try this to add log to console.
+						},
+	   	buy: function(book) {
+						alert("Thanks for buying: ", book.name);
+						}
+  	}
 });
 
-myApp.factory("bookService", function() {
-	var books = [
+
+
+//creating a dependency for books
+
+myApp.factory("bookService", function() { //we are creating our dependencies. we have 2 parameters "bookService" is name of dependency, factory function.
+	var books = [  // we are creating a variable "book" assigning all the data to it. After that we are returning data below
 		{
 			imgUrl: "adultery.jpeg",
 			name: "Adultery",
@@ -97,7 +108,7 @@ myApp.factory("bookService", function() {
 	];
 
 	return {
-		getBooks: function() {
+		getBooks: function() {  // we are creating a getter function which will retunr the selected_books
 			return books;
 		},
 		addToKart: function(book) {
@@ -106,25 +117,42 @@ myApp.factory("bookService", function() {
 	}
 });
 
-myApp.controller("KartListCtrl", function($scope, kartService) {   // we are moving our global variables into the module.
+
+////////////////////////////controller are below///////////////////////////////
+
+
+
+
+myApp.controller("KartListCtrl", function($scope, kartService) {   // we are moving our global variables "KartListCtrl" into the module.
 	$scope.kart = kartService.getKart();
 
 	$scope.buy = function(book) {
 		kartService.buy(book);
+		//console.log("buy: ",book);
+	}
+});
+
+myApp.controller("HeaderCtrl", function($scope,$location) { // we are moving our global variables "HeaderCtrl" into the module.
+																	//$location object help us get different part of the url.$location is a angularjs thing
+	$scope.appDetails = {};
+	$scope.appDetails.title = "BooKart";
+	$scope.appDetails.tagline = "Welcome to my book Store";
+
+//	checking if path parameter match with $location.path which is url after html (#/kart or #/book)
+	$scope.nav ={};
+	$scope.nav.isActive =function(path){
+		if(path === $location.path()){
+		return true;
+		}
 	}
 });
 
 
-myApp.controller("HeaderCtrl", function($scope) {
-	$scope.appDetails = {};
-	$scope.appDetails.title = "BooKart";
-	$scope.appDetails.tagline = "Hi welcome to Raman's Book store";
-});
 
 myApp.controller("BookListCtrl", function($scope, bookService, kartService) {
-	$scope.books = bookService.getBooks();
+	$scope.books = bookService.getBooks();   //This will return the list of book. Our data is provided by our service "bookService"
 
-	$scope.addToKart = function(book) {
+	$scope.addToKart = function(book) {    //adding the book to the kart is responsibility of kart service object. Therefore, we add the kartService dependency next to $scope
 		kartService.addToKart(book);
 	}
 });

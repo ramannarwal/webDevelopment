@@ -6,8 +6,8 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="css/app.css">
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular-route.js"></script>  <!-- this file is helpfull to connect module and partial.-->
-         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular-animate.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular-route.js"></script>  <!-- "ngRoute" this file is helpfull to connect module and partial.-->
+         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular-animate.js"></script> <!--"ngAnimate" check out app.js file first line-->
         <script src="app.js"></script>
     </head>
 <body>
@@ -17,14 +17,14 @@
               <span class="tagline pull-left">{{appDetails.tagline}}</span>
               <div class="nav-wrapper pull-left">
                     <ul class="nav nav-pills">
-                          <li class="active"><a href="#/books">Books</a></li>
-                          <li><a href="#/kart">Kart</a></li>
+                          <li ng-class="{active: nav.isActive('/books')}"><a href="#/books">Books</a></li>
+                          <li ng-class="{active: nav.isActive('/kart')}"><a href="#/kart">Kart</a></li>
                     </ul>
               </div>
         </div>
 
 
-          <div ng-view></div>  <!-- This div will be used to load all the partial in our page. -->
+          <div ng-view class="container"></div>  <!-- One dynamic section using "ng-view" directive. This div will be used to load all the partial in our page. -->
 
 
 </body>

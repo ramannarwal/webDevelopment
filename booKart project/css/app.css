@@ -34,7 +34,7 @@
 #bookListWrapper .book {
 	border: 1px solid gray;
 	padding: 10px;
-	margin-bottom: 10px;	
+	margin-bottom: 10px;
 	position: relative;
 }
 
@@ -42,17 +42,20 @@
 	margin-left: 160px;
 }
 
+
+
 .container.ng-enter {
 	-webkit-transition:0.5s linear all;
 	 -moz-transition:0.5s linear all;
 	 -o-transition:0.5s linear all;
-	 transition:0.5s linear all;
+	 transition:1s linear all;
 	 opacity:0;
 }
 
 .container.ng-enter-active {
 	 opacity:1;
 }
+
 
 .book.ng-leave {
 	-webkit-transition:0.5s linear all;
@@ -67,6 +70,9 @@
 	opacity:0;
 	left: 600px;
 }
+
+
+
 
 .book.ng-enter {
 	-webkit-transition:0.5s linear all;
