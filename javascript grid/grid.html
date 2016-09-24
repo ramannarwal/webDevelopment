@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf=8">
+        <style type="text/css">
+        body{
+            margin:0;
+            padding:0;
+            }
+            .container{
+                overflow:hidden;
+                width:800px;
+                left: 350px;
+                position: absolute;
+                }
+                .box{
+                    width:180px;
+                    height:180px;
+                    float:left;
+
+                    border: 1px solid;
+                  }
+
+
+        </style>
+    </head>
+    <body>
+
+    <div class="container">
+      <div class="box spacing" id="1">Test 1</div>
+      <div class="box spacing" id="2">Test 2</div>
+      <div class="box spacing" id="3">Test 3</div>
+      <div class="box spaceing" id="4">Test 4</div>
+
+      <div class="box spacing" id="5">Test 5</div>
+      <div class="box spacing" id="6">Test 6</div>
+      <div class="box spacing" id="7">Test 7</div>
+      <div class="box spacing" id="8">Test 8</div>
+
+      <div class="box spacing" id="9">Test 9</div>
+      <div class="box spacing" id="10">Test 10</div>
+      <div class="box spacing" id="11">Test 11</div>
+      <div class="box spacing" id="12">Test 12</div>
+
+      <div class="box spacing" id="13">Test 13</div>
+      <div class="box spacing" id="14">Test 14</div>
+      <div class="box spacing" id="15">Test 15</div>
+      <div class="box spacing" id="16">Test 16</div>
+
+  </div>
+
+
+  <script type="text/javascript">
+      var myArray = ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16'];
+
+
+  setInterval(function () {
+      var color = '#'; // hexadecimal starting symbol
+      var letters = ['000000','FF0000','00FF00','0000FF','FFFF00','00FFFF','FF00FF','C0C0C0']; //Set your colors here
+      color += letters[Math.floor(Math.random() * letters.length)];
+
+      var rand = myArray[Math.floor(Math.random() * myArray.length)];
+      var rand1;
+            if (rand1==rand)
+            {alert ("duplicate");}
+            else{
+              var rand1 =rand;
+              document.getElementById(rand1).style.background= color;}
+            },500);
+  </script>
+
+
+
+    </body>
+</html>
